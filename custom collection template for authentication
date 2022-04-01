@@ -1,5 +1,33 @@
-{% comment %}
-  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% comment add this script to new js file name hidden.js %}
+<script>
+  let emailArray = ["anit@gmail.com", "naveen@gmail.com"];
+$('.row-form').submit(function (e) {
+        e.preventDefault();
+        let email = $('#y_email').val();
+     if (emailArray.indexOf(email) == -1) {
+          alert("email is not registered for this offer");
+        } else {
+    $('.hidd').css('display', 'block');
+          $('.row-form input:not(input.y_submit)').val('');
+          $('.error small').text('success');
+          $('.error small').css('visibility', 'visible');
+//           $('.desk button').css('visibility', 'visible');
+//  $('.desk button').html('');
+//           $('.y_tnc a')
+//             .prop(
+//               'href',
+//               ''
+//             );
+          clevertap.profile.push({
+            Site: {
+              sucNotascam_Email: email,
+              Subscribed_sucNotascam: true,
+            },
+         });
+        }
+      });
+      </script>
+
 {% endcomment %}
 <style>
 html{
@@ -156,31 +184,3 @@ width:50%;
 {% if contentForQuerystring contains 'offer-authentication' %}
 <script src="{{'hidden.js' | asset_url }}" defer></script>
 {% endif %}
-<script>
-  let emailArray = ["anit@gmail.com", "naveen@gmail.com"];
-$('.row-form').submit(function (e) {
-        e.preventDefault();
-        let email = $('#y_email').val();
-     if (emailArray.indexOf(email) == -1) {
-          alert("email is not registered for this offer");
-        } else {
-    $('.hidd').css('display', 'block');
-          $('.row-form input:not(input.y_submit)').val('');
-          $('.error small').text('success');
-          $('.error small').css('visibility', 'visible');
-//           $('.desk button').css('visibility', 'visible');
-//  $('.desk button').html('');
-//           $('.y_tnc a')
-//             .prop(
-//               'href',
-//               ''
-//             );
-          clevertap.profile.push({
-            Site: {
-              sucNotascam_Email: email,
-              Subscribed_sucNotascam: true,
-            },
-         });
-        }
-      });
-      </script>
