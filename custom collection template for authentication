@@ -1,0 +1,186 @@
+{% comment %}
+  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+<style>
+html{
+    height: 100%;
+}
+a.text-red.disabled , a.text-red.disabled img {
+    opacity: 0;
+}
+
+.page-header.cf {
+    display: none;
+}
+.user-content h1, .user-content .slide .overlay-text .text, .slide .overlay-text .user-content .text, .user-content h2, .user-content h3, .user-content h4, .user-content h5, .user-content h6 {
+    margin: 1rem 0;
+}
+body{
+    background-color: black;
+    height: 100%;
+}
+.rules{
+    width: 50%;
+    margin: auto;
+    background-color: darkgray;
+    border-radius: 20px;
+    padding: 2%;
+}
+ul.b li {
+  list-style-type: square!important;
+}
+ul.b li{
+    font-size: large;
+    font-weight: bold;
+}
+.section{
+    margin-top: 5%;
+}
+.notification-message {
+margin: auto;
+  font-size: 10px;
+  color: #666;
+  background: white;
+  padding-left: 10px;
+  display: block;
+  width: 60%;
+  padding: 2%;
+  background-color: red;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    background-color: blue;
+  }
+}
+.main-div{
+margin-top: 10%;
+margin-left: 2%;
+margin-right: 2%;
+margin-bottom: 2%;
+}
+.only-mobile{
+    display: none;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+.share{
+  width: 50%;
+  margin: auto;
+  outline: 5px solid yellow;
+  display: flex;
+
+}
+.share-img{
+    width:30%; 
+    padding: 5%;
+}
+.share-msg-div{
+    display: flex;
+    justify-content: center;
+}
+.share-msg{
+    font-size: larger;
+    font-weight: 600;
+}
+.notify{
+    margin: auto;
+    font-size: larger;
+    font-weight: 600;
+}
+.cta{
+    margin-top: 2%;
+    padding:5% ;
+}
+small.text-red {
+    color: red;
+}
+.desk button{
+        visibility: hidden;
+      }
+.desk button {
+    cursor: text;
+    user-select: all;
+}
+@media screen and (max-width: 767px) {
+    .notification-message {
+        width: 100%;
+    }
+input[type="submit"]{width:100%}
+    li{
+        font-size: medium;
+        font-weight: 600;
+    }
+    .share{
+        width: 100%;
+    }
+    .share-img{
+        width: 40%;
+    }
+    .share-msg{
+    font-size: medium;
+    font-weight: 300;
+}
+.rules{
+    width: 100%;
+}
+.center{
+width:50%;
+}
+}
+</style>
+<div class="form-section">
+<div class="form-yanko"><form class="row row-form">
+<div class="col-12 title my-2">
+<div class="col-12 error mb-2"><small class="text-uppercase text-bold text-center" style="color: #ececec; margin-top: 1em;">Please check all the details</small></div>
+</div>
+<div class="col-12 y_emai d-flex justify-content-center mb-4">
+<label for="y_email" class="text-white"></label> <input type="email" id="y_email" value="" required="" autocomplete="none" placeholder=""> <input class="y_submit text-red text-bold" type="submit" value="Submit">
+</div>
+<div class="col-12 y_btns">
+<div class="y_tnc text-red mob text-bold"><a class="text-red mob disabled" title="Submit details to download file"><img class="center" src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/whatsapp_cta.png?v=1648622273" alt=""></a></div>
+</div>
+</form></div>
+</div>
+<div class="col-12  desk mb-2"><button class="text-white">Hello, I'm TEXT </button></div>
+<div class="hidd">
+{% section 'copy-new-launches' %}
+{% section 'collection-template' %}
+</div>
+{%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+{% if contentForQuerystring contains 'offer-authentication' %}
+<script src="{{'hidden.js' | asset_url }}" defer></script>
+{% endif %}
+<script>
+  let emailArray = ["anit@gmail.com", "naveen@gmail.com"];
+$('.row-form').submit(function (e) {
+        e.preventDefault();
+        let email = $('#y_email').val();
+     if (emailArray.indexOf(email) == -1) {
+          alert("email is not registered for this offer");
+        } else {
+    $('.hidd').css('display', 'block');
+          $('.row-form input:not(input.y_submit)').val('');
+          $('.error small').text('success');
+          $('.error small').css('visibility', 'visible');
+//           $('.desk button').css('visibility', 'visible');
+//  $('.desk button').html('');
+//           $('.y_tnc a')
+//             .prop(
+//               'href',
+//               ''
+//             );
+          clevertap.profile.push({
+            Site: {
+              sucNotascam_Email: email,
+              Subscribed_sucNotascam: true,
+            },
+         });
+        }
+      });
+      </script>
